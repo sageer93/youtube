@@ -17,7 +17,7 @@ app.use(cookieParser())
 app.use("/public",express.static(path.join(__dirname,"public")))
 app.use("/api",router)
 app.get("*",function(req,res){
-    res.sendFile(path.join(__dirname,"./public/client/build/index.html"))
+    res.sendFile(path.join(__dirname,"public","client","build","index.html"))
 })
 
 module.exports = app
