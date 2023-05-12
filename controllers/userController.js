@@ -341,13 +341,6 @@ exports.video = async (req, res, next) => {
         }else{
             unlike=true
         }
-        // const existFile = fs.existsSync(video.video)
-        // if(existFile){
-        //     const stat = fs.statSync(video.video)
-        //     const filesize = stat.size;
-        //     const range = req.headers.range;
-        //     const part = range.replace
-        // }
         res.status(200).json({success:true,video,like,unlike,comments})
     } catch (error) {
         res.status(404).json({ success: false, message: error.message })

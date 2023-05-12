@@ -6,6 +6,7 @@
   "author": "",
   "license": "ISC",
   "description": "",
+  "proxy":"http://localhost:8080",
   "scripts": {
     "start": "node server.js",
     "dev": "nodemon server.js"

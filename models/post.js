@@ -1,46 +1,46 @@
 const mongoose = require("mongoose")
 
 const postSchema = new mongoose.Schema({
-    title:{
-        type:String,
-        required:true
+    title: {
+        type: String,
+        required: true
     },
-    video:{
-        type:String,
-        required:true
+    video: {
+        type: String,
+        required: true
     },
-    OwenerProfile:{
-        type:String,
-        required:true
+    OwenerProfile: {
+        type: String,
+        required: true
     },
-    OwnerId:{
-        type:String,
-        required:true
+    OwnerId: {
+        type: String,
+        required: true
     },
-    comments:[
+    comments: [
         {
-            type:mongoose.Schema.Types.ObjectId,
-            ref:"comment"
+            type: mongoose.Schema.Types.ObjectId,
+            ref: "comment"
         }
     ],
-    veiws:[
+    veiws: [
         {
-            type:mongoose.Schema.Types.ObjectId,
-            ref:"User"
+            type: mongoose.Schema.Types.ObjectId,
+            ref: "User"
         }
     ],
-    like:[
+    like: [
         {
-            type:mongoose.Schema.Types.ObjectId,
-            ref:"User"
+            type: mongoose.Schema.Types.ObjectId,
+            ref: "User"
         }
     ],
-    unlike:[
+    unlike: [
         {
-            type:mongoose.Schema.Types.ObjectId,
-            ref:"User"
+            type: mongoose.Schema.Types.ObjectId,
+            ref: "User"
         }
     ],
-},{timestamps:true})
+}, { timestamps: true })
 
-module.exports = new mongoose.model("post",postSchema)
+module.exports = new mongoose.model("post", postSchema)

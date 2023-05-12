@@ -1,4 +1,4 @@
-const { SignUp, Login, ShowVideos, MyVideos, watchLater, savewatchLater, likeVideo, showlikevideo, deleteMyvideo, unlikeVideo, unsavewatchLater, video, getOwner, subcribe, Addcomment, addvideo, uploadvideo, notification, myAccount, logOUt, showHistory, removiHistory, userProfile, getSubcriptions } = require("../controllers/userController");
+const { SignUp, Login, ShowVideos, MyVideos, watchLater, savewatchLater, likeVideo, showlikevideo, deleteMyvideo, unlikeVideo, unsavewatchLater, video, getOwner, subcribe, uploadvideo, notification, myAccount, logOUt, showHistory, removiHistory, userProfile, getSubcriptions } = require("../controllers/userController");
 const isAuth = require("../auth/userAuth")
 const router = require("express").Router();
 const imageMulter = require('../utils/uploadImageHandler')

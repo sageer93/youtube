@@ -3,76 +3,76 @@ const jwt = require("jsonwebtoken");
 const bcrypt = require("bcryptjs")
 
 const userSchema = new mongoose.Schema({
-    name:{
-        type:String,
-        required:[true,"Name is required"]
+    name: {
+        type: String,
+        required: [true, "Name is required"]
     },
-    email:{
-        type:String,
-        required:[true,"email is required"],
-        unique:true
+    email: {
+        type: String,
+        required: [true, "email is required"],
+        unique: true
     },
-    image:{
-        type:String,
+    image: {
+        type: String,
     },
-    password:{
-        type:String,
-        required:[true,"password is required"]
+    password: {
+        type: String,
+        required: [true, "password is required"]
     },
-    confirmPassword:{
-        type:String,
+    confirmPassword: {
+        type: String,
     },
-    post:[
+    post: [
         {
-            type:mongoose.Schema.Types.ObjectId,
-            ref:"post"
+            type: mongoose.Schema.Types.ObjectId,
+            ref: "post"
         }
     ],
-    subcriber:[
+    subcriber: [
         {
-            type:mongoose.Schema.Types.ObjectId,
-            ref:"User"
+            type: mongoose.Schema.Types.ObjectId,
+            ref: "User"
         }
     ],
-    watchLater:[
+    watchLater: [
         {
-            type:mongoose.Schema.Types.ObjectId,
-            ref:"post"
+            type: mongoose.Schema.Types.ObjectId,
+            ref: "post"
         }
     ],
-    likesVideos:[
+    likesVideos: [
         {
-            type:mongoose.Schema.Types.ObjectId,
-            ref:"post"
+            type: mongoose.Schema.Types.ObjectId,
+            ref: "post"
         }
     ],
-    history:[
+    history: [
         {
-            type:mongoose.Schema.Types.ObjectId,
-            ref:"history"
+            type: mongoose.Schema.Types.ObjectId,
+            ref: "history"
         }
     ],
-    notivication:[
+    notivication: [
         {
-            type:mongoose.Schema.Types.ObjectId,
-            ref:"notification"
+            type: mongoose.Schema.Types.ObjectId,
+            ref: "notification"
         }
     ],
 })
 
 
-userSchema.methods.ganerateToken = async function(id){
+userSchema.methods.ganerateToken = async function (id) {
     try {
-        return await jwt.sign({_id:id},process.env.SECRETKEY,{expiresIn:"24h"})
+        return await jwt.sign({ _id: id }, process.env.SECRETKEY, { expiresIn: "24h" })
     } catch (error) {
         console.log(error)
     }
 }
 
-userSchema.pre("save",async function(next){
+userSchema.pre("save", async function (next) {
     try {
-        if(this.isModified("password")){
-            this.password = await bcrypt.hash(this.password,10)
+        if (this.isModified("password")) {
+            this.password = await bcrypt.hash(this.password, 10)
             this.confirmPassword = undefined
         }
         next()
@@ -81,11 +81,11 @@ userSchema.pre("save",async function(next){
     }
 })
 
-userSchema.methods.comparePassword= async function(password){
+userSchema.methods.comparePassword = async function (password) {
     try {
-        return await bcrypt.compare(password,this.password)
+        return await bcrypt.compare(password, this.password)
     } catch (error) {
         console.log(error)
     }
 }
-module.exports = new mongoose.model("User",userSchema)
+module.exports = new mongoose.model("User", userSchema)
