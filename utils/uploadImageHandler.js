@@ -1,8 +1,17 @@
 const multer = require("multer")
-
-const filter = (req, file, cb) => {
-    if (file.mimetype === "image/png" || file.mimetype === "image/jpeg" || file.mimetype === "image/jpg" || file.mimetype === "image/tiff") {
-        return cb(null, true)
+const cloudinary = require("./cloudinaryConfig")
+const {CloudinaryStorage } = require("multer-storage-cloudinary")
+const storage = new CloudinaryStorage({
+    cloudinary:cloudinary,
+    params:{
+        folder:"images",
+        format: async (req, file) => 'png',
+        public_id: (req, file) => {
+            const timestamp = Date.now();
+            const userId = req.user && req.user._id ? req.user._id : "avatar";
+            return `${userId}-${timestamp}`;
+        },
     }
-}
-module.exports = multer({ dest: "public/images", fileFilter: filter }).single("image")
+})
+
+module.exports = multer({storage:storage}).single("image")

@@ -5,7 +5,6 @@ const express = require("express")
 const app = express();
 const cors = require("cors");
 const router = require("./Routes/userRoute");
-
 app.use(cors({
     origin: "https://youtube-royy.onrender.com",
     credentials: true,
@@ -15,7 +14,6 @@ app.use(bodyParser.urlencoded({ extended: true }))
 app.use(express.json())
 app.use(cookieParser())
 app.use("/api", router)
-app.use("/public", express.static(path.join(__dirname, "public")))
 app.use(express.static(path.join(__dirname, "./public/client/build")))
 
 

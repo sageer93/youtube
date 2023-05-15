@@ -10,7 +10,6 @@ const sockets = (io) => {
                     const decode = jwt.decode(socket.handshake.auth.token)
                     const loginUser = await User.findById(decode._id)
                     const video = await Video.findById(videoId)
-                    console.log(comment, videoId)
                     const comments = await Comment({
                         comment,
                         user: loginUser.name,
@@ -24,18 +23,12 @@ const sockets = (io) => {
                     socket.emit("comment", { comments })
                 }
             } catch (error) {
-                console.log(error)
             }
         })
         socket.on("typing", ({ name, profile, videoId, typing }) => {
             socket.broadcast.emit("showtyping", { name, profile, videoId, typing })
         })
 
-
-
-        socket.on("disconnect", () => {
-            console.log("user disconnected")
-        })
     })
 }
 

@@ -5,7 +5,7 @@ const imageMulter = require('../utils/uploadImageHandler')
 const videoMulter = require('../utils/uploadVideoHandler')
 
 
-router.post("/sign-up", imageMulter, SignUp)
+router.post("/sign-up",imageMulter, SignUp)
 router.post("/login", Login)
 router.get("/showvideos", isAuth, ShowVideos)
 router.get("/myvideos", isAuth, MyVideos)
